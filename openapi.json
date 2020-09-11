@@ -1,0 +1,198 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "CPaaS REST API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/v1/components": {
+            "get": {
+                "tags": [
+                    "component"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Hmm"
+                    }
+                },
+                "operationId": "list",
+                "summary": "List of components",
+                "description": "Returns components available in the system."
+            },
+            "post": {
+                "tags": [
+                    "component"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+
+                            }
+                        },
+                        "description": "Created component"
+                    }
+                },
+                "summary": "Create component",
+                "description": "Creates a new component"
+            }
+        },
+        "/v1/components/{id}": {
+            "get": {
+                "tags": [
+                    "component"
+                ],
+                "parameters": [
+                    {
+                        "examples": {
+                            "component-id": {
+                                "value": "\"7856fb9e-0c6c-4b81-91b9-b4fe70aa5581\""
+                            }
+                        },
+                        "name": "id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/yaml": {
+                                "examples": {
+                                    "Component content in YAML format": {
+                                        "value": "name: \"Java component\"\ntype: \"java\"\nid: \"test-java\"\n\nbuilds:\n  - name: \"pnc\"\n    type: \"pig\"\n    pig-source:\n      repo: \"https://gitlab.cee.redhat.com/middleware/build-configurations.git\"\n      ref: \"cpaas-ci\"\n      root: \"cpaas/development\"\n    staging-dir: \"cpaas-tp\"\n    brew-push: false\n"
+                                    }
+                                }
+                            },
+                            "application/json": {
+                                "examples": {
+                                    "Component in JSON format": {
+                                        "value": {
+                                            "name": "Java component",
+                                            "type": "java",
+                                            "id": "f3f45956-b3f1-427e-9dc4-c01a620d97ae",
+                                            "builds": [
+                                                {
+                                                    "name": "pnc",
+                                                    "type": "pig",
+                                                    "pig-source": {
+                                                        "repo": "https://gitlab.cee.redhat.com/middleware/build-configurations.git",
+                                                        "ref": "cpaas-ci",
+                                                        "root": "cpaas/development"
+                                                    },
+                                                    "staging-dir": "cpaas-tp",
+                                                    "brew-push": false
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Full component object is returned."
+                    }
+                },
+                "summary": "Get component",
+                "description": "Returns specific component"
+            }
+        },
+        "/v1/pipelines": {
+            "get": {
+                "tags": [
+                    "pipeline"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+
+                            }
+                        },
+                        "description": "List of pipelines"
+                    }
+                },
+                "summary": "List pipelines"
+            },
+            "post": {
+                "tags": [
+                    "pipeline"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pipeline object"
+                    }
+                },
+                "summary": "Create new pipeline"
+            }
+        },
+        "/v1/pipelines/{id}": {
+            "get": {
+                "tags": [
+                    "pipeline"
+                ],
+                "parameters": [
+                    {
+                        "examples": {
+                            "Pipeline ID": {
+                                "value": "770440e1-062d-4ede-b4d7-8471d3fe36ca"
+                            }
+                        },
+                        "name": "id",
+                        "description": "Pipeline ID",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pipeline object."
+                    }
+                },
+                "summary": "Get pipeline"
+            }
+        },
+        "/v1/pipelines/{id}/run": {
+            "post": {
+                "tags": [
+                    "pipeline"
+                ],
+                "parameters": [
+                    {
+                        "examples": {
+                            "Pipeline ID": {
+                                "value": "770440e1-062d-4ede-b4d7-8471d3fe36ca"
+                            }
+                        },
+                        "name": "id",
+                        "description": "Pipeline ID",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+
+                            },
+                            "application/yaml": {
+
+                            }
+                        },
+                        "description": "PipelinRun object."
+                    }
+                },
+                "summary": "Run a pipeline"
+            }
+        }
+    }
+}
